@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Dollar from "../icons/Dollar";
 import Location from "../icons/Location";
 import styles from "./Card.module.css";
@@ -26,6 +27,7 @@ function Card(props) {
         )}
         {discount ? <div className={styles.badge}>{discount}%</div> : null}
       </div>
+      <Link href={`/menu/${id}`}>See Details</Link>
     </div>
   );
 }
