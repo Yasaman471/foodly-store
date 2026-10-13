@@ -8,7 +8,7 @@ export default function FoodDetails({ data }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch("http://localhost:4000/data");
+  const res = await fetch(`${process.env.BASE_URL}/data`);
   const items = await res.json();
   const data = items.slice(0, 10);
 
@@ -25,13 +25,13 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { menuId } = context.params;
 
-  const res = await fetch(`http://localhost:4000/data/${menuId}`);
+  const res = await fetch(`${process.env.BASE_URL}/data/${menuId}`);
   const data = await res.json();
 
   if (!data.id) return { notFound: true };
 
   return {
     props: { data },
-    revalidate: 10,
+    revalidate: +process.env.REVALIDATE,
   };
 }
